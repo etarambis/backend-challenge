@@ -1,0 +1,42 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: challenge-cursor-api
+    restart: unless-stopped
+    ports:
+      - '${PORT:-3000}:3000'
+    environment:
+      PORT: ${PORT:-3000}
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_DATABASE: ${DB_DATABASE:-challenge_cursor}
+      POKEAPI_BASE_URL: ${POKEAPI_BASE_URL:-https://pokeapi.co/api/v2}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: challenge-cursor-postgres
+    restart: unless-stopped
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_DATABASE:-challenge_cursor}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-challenge_cursor}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
