@@ -1,5 +1,8 @@
 # Cursor BackEnd Challenge
 
+You have to build a microservice that exposes a REST api with two different tables, users anda states. Both tables should be open to creation, deletion, or update.Every request must only accept this Content-types
+
+
 ### Badge
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/etarambis/backend-challenge/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/etarambis/backend-challenge/tree/master)
