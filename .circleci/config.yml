@@ -1,9 +1,20 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
+
+executors:
+  node-with-postgres:
+    docker:
+      - image: cimg/node:22.14
+      - image: cimg/postgres:16.14
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: challenge_cursor_test  
+
 jobs:
   build_and_test: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+    executor: node-with-postgres
     steps:
       - checkout
       - node/install-packages:
