@@ -1,5 +1,9 @@
 # Cursor BackEnd Challenge
 
+### Badge
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/etarambis/backend-challenge/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/etarambis/backend-challenge/tree/master)
+
 ### Features
 
 - Create new Users with their Pokemon Ids
