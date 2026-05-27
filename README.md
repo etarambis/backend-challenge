@@ -47,7 +47,7 @@ chmod 711 ./up_test.sh
 ## Techs 
 
 - Nest: 11
-- Node
+- Node: 24.13.1
 - TypeORM
 - Postgres
 
