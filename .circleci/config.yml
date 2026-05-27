@@ -9,7 +9,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: npm run test 
+          command: npm run test:e2e
           name: Run tests
       - run:
           command: npm run  build
