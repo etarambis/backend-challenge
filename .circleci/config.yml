@@ -30,6 +30,7 @@ jobs:
           root: ~/project
           paths: ['.']
       - coveralls/upload:
+          coveralls_token: COVERALLS_REPO_TOKEN
           parallel: true
           flag_name: test 1
           verbose: true
