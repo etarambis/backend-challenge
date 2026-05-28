@@ -14,27 +14,28 @@ executors:
           POSTGRES_DB: challenge_cursor_test  
 
 jobs:
-  build_and_test: # this can be any name you choose
+  build_and_test:
     executor: node-with-postgres
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: npm run test:e2e
-          name: Run tests
+          command: npm run test:coverage
+          name: Run tests with coverage
       - run:
-          command: npm run  build
+          command: npm run build
           name: Build app
       - persist_to_workspace:
           root: ~/project
           paths: ['.']
       - coveralls/upload:
           coveralls_token: COVERALLS_REPO_TOKEN
-          parallel: true
-          flag_name: test 1
+          parallel: false
+          flag_name: Unit Tests
           verbose: true
+
 workflows:
-  build_test_deploy: # this can be any name you choose
+  build_test_deploy:
     jobs:
       - build_and_test
