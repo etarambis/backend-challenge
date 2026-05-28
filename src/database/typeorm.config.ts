@@ -19,6 +19,8 @@ export const getTypeOrmConfig = (
 ): TypeOrmModuleOptions => {
   const databaseUrl = config.get<string>('DATABASE_URL');
   const isProduction = config.get<string>('NODE_ENV') === 'production';
+  // 1. Capturamos la variable FORCE_SYNC que seteamos en Heroku
+  const forceSync = config.get<string>('FORCE_SYNC') === 'true';
 
   const connection = databaseUrl
     ? parseDatabaseUrl(databaseUrl)
@@ -34,7 +36,8 @@ export const getTypeOrmConfig = (
     type: 'postgres',
     ...connection,
     entities,
-    synchronize: !isProduction,
+    // 2. Si forceSync es true, se sincronizará la BD aunque estemos en producción
+    synchronize: forceSync || !isProduction,
     ...(databaseUrl && {
       ssl: { rejectUnauthorized: false },
     }),
