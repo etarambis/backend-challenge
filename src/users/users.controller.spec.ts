@@ -50,6 +50,15 @@ describe('UsersController', () => {
     expect(service.findAll).toHaveBeenCalled();
   });
 
+  it('should delegate findById to the service', async () => {
+    service.findById.mockResolvedValue(mockResponse);
+
+    const result = await controller.findById(1);
+
+    expect(service.findById).toHaveBeenCalledWith(1);
+    expect(result).toEqual(mockResponse);
+  });
+
   it('should delegate create to the service', async () => {
     const dto = {
       email: 'john@example.com',
@@ -64,6 +73,24 @@ describe('UsersController', () => {
     expect(service.create).toHaveBeenCalledWith(dto);
     expect(result.email).toBe(dto.email);
     expect(result.pokemons).toEqual(mockResponse.pokemons);
+  });
+
+  it('should delegate update to the service', async () => {
+    const dto = { name: 'Jane Doe' };
+    service.update.mockResolvedValue({ ...mockResponse, name: dto.name });
+
+    const result = await controller.update(1, dto);
+
+    expect(service.update).toHaveBeenCalledWith(1, dto);
+    expect(result.name).toBe(dto.name);
+  });
+
+  it('should delegate delete to the service', async () => {
+    service.delete.mockResolvedValue(undefined);
+
+    await controller.delete(1);
+
+    expect(service.delete).toHaveBeenCalledWith(1);
   });
 
   it('should delegate replace to the service', async () => {
