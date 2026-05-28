@@ -7,6 +7,8 @@ You have to build a microservice that exposes a REST api with two different tabl
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/etarambis/backend-challenge/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/etarambis/backend-challenge/tree/master)
 
+[![Coverage Status](https://coveralls.io/repos/github/etarambis/backend-challenge/badge.svg)](https://coveralls.io/github/etarambis/backend-challenge)
+
 ### Features
 
 - Create new Users with their Pokemon Ids
