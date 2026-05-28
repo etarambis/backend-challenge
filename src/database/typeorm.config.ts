@@ -2,15 +2,41 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { entities } from './entities';
 
+const parseDatabaseUrl = (databaseUrl: string) => {
+  const url = new URL(databaseUrl);
+
+  return {
+    host: url.hostname,
+    port: parseInt(url.port || '5432', 10),
+    username: decodeURIComponent(url.username),
+    password: decodeURIComponent(url.password),
+    database: url.pathname.replace(/^\//, ''),
+  };
+};
+
 export const getTypeOrmConfig = (
   config: ConfigService,
-): TypeOrmModuleOptions => ({
-  type: 'postgres',
-  host: config.get<string>('DB_HOST', 'localhost'),
-  port: parseInt(config.get<string>('DB_PORT', '5432'), 10),
-  username: config.get<string>('DB_USERNAME', 'postgres'),
-  password: config.get<string>('DB_PASSWORD', 'postgres'),
-  database: config.get<string>('DB_DATABASE', 'challenge_cursor'),
-  entities,
-  synchronize: config.get<string>('NODE_ENV') !== 'production',
-});
+): TypeOrmModuleOptions => {
+  const databaseUrl = config.get<string>('DATABASE_URL');
+  const isProduction = config.get<string>('NODE_ENV') === 'production';
+
+  const connection = databaseUrl
+    ? parseDatabaseUrl(databaseUrl)
+    : {
+        host: config.get<string>('DB_HOST', 'localhost'),
+        port: parseInt(config.get<string>('DB_PORT', '5432'), 10),
+        username: config.get<string>('DB_USERNAME', 'postgres'),
+        password: config.get<string>('DB_PASSWORD', 'postgres'),
+        database: config.get<string>('DB_DATABASE', 'challenge_cursor'),
+      };
+
+  return {
+    type: 'postgres',
+    ...connection,
+    entities,
+    synchronize: !isProduction,
+    ...(databaseUrl && {
+      ssl: { rejectUnauthorized: false },
+    }),
+  };
+};
