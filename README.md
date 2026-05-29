@@ -2,6 +2,9 @@
 
 You have to build a microservice that exposes a REST api with two different tables, users anda states. Both tables should be open to creation, deletion, or update.Every request must only accept this Content-types
 
+## Deployed App Runnig on HEROKU
+
+- [SWAGGER](https://dry-wave-78186-57dffe04a6e4.herokuapp.com/api#)
 
 ### Badge
 
@@ -56,9 +59,17 @@ chmod 711 ./up_test.sh
 - TypeORM
 - Postgres
 
+## Decisions made
+
+- Jest/Testing/E2E: Jest is the most used testing framework of JS. Same argument as above. E2E testing was donde because it is useless to always test every single part. 
+That is why if tjhe controller provide the proper answer the test has passed.
+
+##
+
+
 ## Route
 
-- API Swagger: [http://localhost:3000/api](http://localhost:3000/api)
+- local: [API Swagger](http://localhost:3000/api)
 
 ## Env vars should be defined 
 
