@@ -4,7 +4,7 @@ You have to build a microservice that exposes a REST api with two different tabl
 
 ## App runnig on
 
-- [SWAGGER] [https://dry-wave-78186-57dffe04a6e4.herokuapp.com/api#]
+- [SWAGGER] (https://dry-wave-78186-57dffe04a6e4.herokuapp.com/api#)
 
 ### Badge
 
@@ -69,7 +69,7 @@ That is why if tjhe controller provide the proper answer the test has passed.
 
 ## Route
 
-- local: [API Shagger] [http://localhost:3000/api]
+- local: [API Shagger] (http://localhost:3000/api)
 
 ## Env vars should be defined 
 
