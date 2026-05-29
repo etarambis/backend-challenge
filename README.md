@@ -69,7 +69,7 @@ That is why if tjhe controller provide the proper answer the test has passed.
 
 ## Route
 
-- local: [API Shagger](http://localhost:3000/api)
+- local: [API Swagger](http://localhost:3000/api)
 
 ## Env vars should be defined 
 
