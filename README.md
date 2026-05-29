@@ -2,7 +2,7 @@
 
 You have to build a microservice that exposes a REST api with two different tables, users anda states. Both tables should be open to creation, deletion, or update.Every request must only accept this Content-types
 
-## App runnig on
+## Deployed App Runnig on HEROKU
 
 - [SWAGGER](https://dry-wave-78186-57dffe04a6e4.herokuapp.com/api#)
 
