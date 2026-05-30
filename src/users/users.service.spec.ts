@@ -76,7 +76,11 @@ describe('UsersService', () => {
 
   it('should create a user without pokemonIds', async () => {
     repository.findByEmail.mockResolvedValue(null);
-    repository.create.mockResolvedValue({ ...mockUser, pokemonIds: [], pokemonDetails: [] });
+    repository.create.mockResolvedValue({
+      ...mockUser,
+      pokemonIds: [],
+      pokemonDetails: [],
+    });
 
     const result = await service.create({
       email: 'john@example.com',

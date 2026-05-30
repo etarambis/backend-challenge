@@ -1,3 +1,4 @@
+
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { PokemonDetail } from '../clients/pokemon.client';
 

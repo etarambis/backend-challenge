@@ -119,7 +119,11 @@ describe('TypeOrmUsersRepository', () => {
   it('should update a user without validating pokemon when ids are empty', async () => {
     const userWithoutPokemon = { ...mockUser, pokemonIds: [] };
     typeOrmRepo.findOne.mockResolvedValue(userWithoutPokemon);
-    typeOrmRepo.update.mockResolvedValue({ affected: 1, raw: [], generatedMaps: [] });
+    typeOrmRepo.update.mockResolvedValue({
+      affected: 1,
+      raw: [],
+      generatedMaps: [],
+    });
 
     await repository.update(1, { name: 'Jane Doe' });
 
@@ -129,7 +133,11 @@ describe('TypeOrmUsersRepository', () => {
 
   it('should update a user and validate pokemon ids', async () => {
     typeOrmRepo.findOne.mockResolvedValue({ ...mockUser });
-    typeOrmRepo.update.mockResolvedValue({ affected: 1, raw: [], generatedMaps: [] });
+    typeOrmRepo.update.mockResolvedValue({
+      affected: 1,
+      raw: [],
+      generatedMaps: [],
+    });
 
     await repository.update(1, { pokemonIds: [1, 4] });
 
